@@ -4,6 +4,10 @@ import { Row, Col, Modal } from "antd";
 import { ZoomInOutlined, DeleteOutlined, DownloadOutlined } from "@ant-design/icons";
 import { exportVectorFeaturesAsGeoJSON } from "../helper";
 
+/**
+ * Layer specific controls
+ * @component 
+ */
 const LayerSwitch = () => {
   const mapLayers = useRef(null);
   const [layers, setLayers] = useState([]);
@@ -11,6 +15,10 @@ const LayerSwitch = () => {
   const [activeLayer, setActiveLayer] = useState(null);
   const { map } = useContext(MapContext);
 
+  /**
+   * Update the layers in the state as per map layers changes
+   * @function
+   */
   const updateLayers = () => {
     mapLayers.current = map.getLayers();
     setLayers([...mapLayers.current.getArray().filter((layer) => layer.getZIndex() !== 0)]);
@@ -24,6 +32,10 @@ const LayerSwitch = () => {
     // eslint-disable-next-line
   }, [map]);
 
+  /**
+   * Show/Hide all layers
+   * @function
+   */
   const toggleAll = useMemo(() => {
     const areAllOn = layers.every((layer) => layer.getVisible());
     const iconClassName = areAllOn ? "far fa-eye-slash" : "far fa-eye";
@@ -46,11 +58,19 @@ const LayerSwitch = () => {
     // eslint-disable-next-line
   }, [layers]);
 
+  /**
+   * Show or hide delete layer popup
+   * @param {boolean} [resetActiveLayer=false] - Whether active layer to delete has to be reset
+   */
   const toggleDeleteLayer = (resetActiveLayer=false) => {
     setShowConfirmRemoveLayer(v => !v);
     if (resetActiveLayer) setActiveLayer(null);
   };
 
+  /**
+   * Delete a layer
+   * @function
+   */
   const deleteLayer = () => {
     map.removeLayer(activeLayer);
     toggleDeleteLayer(true);
@@ -64,21 +84,37 @@ const LayerSwitch = () => {
         layers.length > 0 && layers.map((layer, index) => {
           const isLayerVisible = layer.getVisible() ? "far fa-eye" : "far fa-eye-slash";
   
+          /**
+           * Show or hide a layer
+           * @function
+           */
           const toggleVisibility = () => {
             const layerVisible = layer.getVisible();
             layer.setVisible(!layerVisible);
             updateLayers();
           };
 
+          /**
+           * Shows confirmation popup to delete a layer
+           * @function
+           */
           const markLayerForDelete = () => {
             setActiveLayer(layer);
             toggleDeleteLayer();
           };
   
+          /**
+           * Zoom to layer handler
+           * @function
+           */
           const zoomToLayer = () => {
             map.getView().fit(layer.getSource().getExtent());
           };
 
+          /**
+           * Download a layer as GeoJSON
+           * @function
+           */
           const downloadLayerAsGeoJSON = () => {
             exportVectorFeaturesAsGeoJSON(layer.getSource().getFeatures());
           };

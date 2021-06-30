@@ -2,6 +2,11 @@ import { click } from "ol/events/condition";
 import Select from "ol/interaction/Select";
 import { useEffect, useRef } from "react";
 
+/**
+ * Hook: Interaction to allow user to select features in the map
+ * @function
+ * @param {object} map - The [map]{@link https://openlayers.org/en/v6.5.0/apidoc/module-ol_Map-Map.html} object
+ */
 const useSelect = (map) => {
   const selectInteraction = useRef(null);
 

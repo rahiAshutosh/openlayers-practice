@@ -7,10 +7,24 @@ import VectorSource from "ol/source/Vector";
 import GeoJSON from 'ol/format/GeoJSON';
 import MapContext from "../Map/MapContext";
 
+/**
+ * @callback onSuccess
+ * @param {string} param
+ */
+/**
+ * Dummy request function for antd file upload to avoid file upload at a URL
+ * @function
+ * @param {*} file - File Object
+ * @param {onSuccess} onSuccess - Callback to execute when setTimeout executes
+ */
 const dummyRequest = ({ file, onSuccess }) => {
   setTimeout(() => { onSuccess("ok"); }, 0);
 };
 
+/**
+ * Import GeoJSON layer(s) in the map
+ * @component 
+ */
 const Import = () => {
   const { map } = useContext(MapContext);
   const [showUpload, setShowUpload] = useState(false);

@@ -1,6 +1,10 @@
 import { Drawer, Tooltip } from "antd";
 import React, { useState } from "react";
 
+/**
+ * Style Features Component
+ * @component
+ */
 const Features = () => {
   const [showStyle, setShowStyle] = useState(false);
   const toggleShowStyle = () => {

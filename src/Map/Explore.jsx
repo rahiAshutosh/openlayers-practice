@@ -2,6 +2,10 @@ import React, { useContext, useRef, useState, useEffect } from "react";
 import * as ol from "ol";
 import MapContext from "./MapContext";
 
+/**
+ * Used to show coordinates of point where user clicks
+ * @component
+ */
 const Explore = () => {
   const popup = useRef();
   const overlay = useRef();

@@ -5,6 +5,11 @@ import VectorLayer from 'ol/layer/Vector';
 import VectorSource from "ol/source/Vector";
 import { Modify } from 'ol/interaction';
 
+/**
+ * Hook: Interaction for adding ability to drag and drop file into the map
+ * @function
+ * @param {object} map - The [map]{@link https://openlayers.org/en/v6.5.0/apidoc/module-ol_Map-Map.html} object
+ */
 const useDragDrop = (map) => {
   const dragDrop = useRef();
 

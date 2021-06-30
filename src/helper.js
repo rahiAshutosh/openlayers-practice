@@ -1,5 +1,13 @@
 import GeoJSON from "ol/format/GeoJSON";
 
+/**
+ * Export (Download) Vector features as GeoJSON
+ * @function
+ * @param {array} features - Array of features ([ol.Feature]{@link https://openlayers.org/en/v6.5.0/apidoc/module-ol_Feature-Feature.html})
+ * @param {object=} [config={}] - Config Object
+ * @param {string=} config.dataProjection - Target Projection
+ * @param {string=} config.featureProjection - Existing Features' Projection
+ */
 const exportVectorFeaturesAsGeoJSON = (features, config={}) => {
   const geoJson = (new GeoJSON()).writeFeaturesObject(features, {
     dataProjection: config.dataProjection || 'EPSG:4326',

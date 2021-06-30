@@ -6,6 +6,14 @@ import useOverviewMap from "../Controls/useOverviewMap";
 import useDragDrop from "../Interactions/useDragDrop";
 import useSelect from "../Interactions/useSelect";
 
+/**
+ * HOC: Map Wrapper Component, Initializes the map and adds interactions to it
+ * @component
+ * @param {object} props
+ * @param {ReactNode} props.children - Children of the component (Layers) and others
+ * @param {number} props.zoom - Zoom Value
+ * @param {number} props.center - Center Value
+ */
 const Map = ({
   children,
   zoom,

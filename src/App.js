@@ -14,28 +14,34 @@ import Style from "ol/style/Style";
 import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 import GeometryType from "ol/geom/GeometryType";
+import { GMAP_BASELAYERS, INITIAL_COORDINATES, INITIAL_ZOOM } from "./constants";
 
 export const CurrentLayerContext = createContext();
+
+/**
+ * Main App Component
+ * @component 
+ */
 const App = () => {
-  const center = useRef([0,0]);
-  const zoom = useRef(1);
+  const center = useRef(INITIAL_COORDINATES);
+  const zoom = useRef(INITIAL_ZOOM);
   const [selectedLayer, setSelectedLayer] = useState('hybrid');
 
-  const handleChangeLayer = (val) => {
-    setSelectedLayer(val);
+  /**
+   * Layer change handler
+   * @param {string} layerName - Name of layer being chosen
+   */
+  const handleChangeLayer = (layerName) => {
+    setSelectedLayer(layerName);
   };
 
+  /**
+   * Provide source for base layer as per user choice
+   * @function
+   */
   const getSource = useMemo(() => {
-    const url = {
-      roadmap: 'http://mt0.google.com/vt/lyrs=m&hl=en&x={x}&y={y}&z={z}',
-      terrain: 'http://mt0.google.com/vt/lyrs=p&hl=en&x={x}&y={y}&z={z}',
-      alteredRoadmap: 'http://mt0.google.com/vt/lyrs=r&hl=en&x={x}&y={y}&z={z}',
-      satelliteOnly: 'http://mt0.google.com/vt/lyrs=s&hl=en&x={x}&y={y}&z={z}',
-      terrainOnly: 'http://mt0.google.com/vt/lyrs=t&hl=en&x={x}&y={y}&z={z}',
-      hybrid: 'http://mt0.google.com/vt/lyrs=y&hl=en&x={x}&y={y}&z={z}'
-    };
     return new olSource.XYZ({
-      url: url[selectedLayer]
+      url: GMAP_BASELAYERS[selectedLayer]
     });
   }, [selectedLayer]);
 
@@ -61,6 +67,9 @@ const App = () => {
     }
   });
 
+  /**
+   * Context containing the active layer, and callback to change the layer
+   */
   const currentLayerContext = {
     selectedLayer,
     handleChangeLayer

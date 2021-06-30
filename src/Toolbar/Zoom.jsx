@@ -3,6 +3,10 @@ import { PlusOutlined, MinusOutlined } from "@ant-design/icons";
 import MapContext from "../Map/MapContext";
 import { Tooltip } from "antd";
 
+/**
+ * Zoom In/Out Controls
+ * @component 
+ */
 const Zoom = () => {
   const { map } = useContext(MapContext);
 

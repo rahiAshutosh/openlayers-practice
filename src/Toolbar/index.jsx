@@ -6,6 +6,10 @@ import Import from "./Import";
 import Layers from "./Layers";
 import Zoom from "./Zoom";
 
+/**
+ * Toolbar for interacting with and controlling the map
+ * @component
+ */
 const Toolbar = ({
   drawSource
 }) => {

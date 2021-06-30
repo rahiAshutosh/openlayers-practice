@@ -4,6 +4,10 @@ import { Draw, Modify, Snap } from "ol/interaction";
 import MapContext from "../Map/MapContext";
 import GeometryType from "ol/geom/GeometryType";
 
+/**
+ * For drawing polygons, lines and points
+ * @component
+ */
 const DrawActions = ({
   drawSource,
 }) => {

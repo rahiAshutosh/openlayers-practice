@@ -4,6 +4,10 @@ import MapContext from "../Map/MapContext";
 import VectorLayer from "ol/layer/Vector";
 import { exportVectorFeaturesAsGeoJSON } from "../helper";
 
+/**
+ * Export current map (all vector layers) as GeoJSON
+ * @component
+ */
 const Export = () => {
   const { map } = useContext(MapContext);
 
