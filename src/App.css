@@ -1,0 +1,134 @@
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+.ol-map {
+  min-width: 600px;
+  min-height: 500px;
+  height: 100vh;
+  width: 100%;
+}
+.ol-control {
+  position: absolute;
+  background-color: rgba(255,255,255,0.4);
+  border-radius: 4px;
+  padding: 2px;
+}
+.ol-full-screen {
+  top: .5em;
+  right: .5em;
+}
+
+.toolbar {
+  position: absolute;
+  left: 0;
+  top: 0;
+  z-index: 1;
+  background-color: rgba(0,0,0,0.75);
+  font-weight: bold;
+  color: #ffffff;
+}
+
+.toolbar .btn {
+  font-size: 1rem;
+  padding: 12px 16px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.toolbar .btn:hover {
+  background-color: rgba(0,0,0,1);
+}
+
+.coord-popup {
+  position: absolute;
+  white-space: nowrap;
+  background-color: #ffffff;
+  padding: 8px;
+  font-size: .85rem;
+  border-radius: 4px;
+  box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+}
+
+.ant-upload {
+  color: inherit !important;
+}
+
+.layer-switch {
+  width: 20vw;
+  font-family: Lato !important;
+  padding: 16px 32px;
+  position: absolute;
+  right: 16px;
+  top: 16px;
+  z-index: 1;
+  background-color: rgba(0,0,0,0.75);
+  font-weight: bold;
+  color: #ffffff;
+  font-size: 1rem;
+}
+
+.layer-switch .heading {
+  width: 100%;
+  font-size: 1.25rem;
+  font-weight: bold;
+  text-align: center;
+  border-bottom: 1px solid #fff;
+  margin-bottom: 8px;
+}
+
+.layer-switch .ant-checkbox {
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.layer-switch .ant-checkbox + span {
+  color: #fff;
+}
+
+.layer-switch i {
+  padding-right: 8px;
+  cursor: pointer;
+}
+
+.layer-option {
+  padding: 4px 0;
+  display: flex;
+  align-items: center;
+}
