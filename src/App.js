@@ -14,18 +14,23 @@ import Style from "ol/style/Style";
 import Fill from "ol/style/Fill";
 import Stroke from "ol/style/Stroke";
 import GeometryType from "ol/geom/GeometryType";
-import { GMAP_BASELAYERS, INITIAL_COORDINATES, INITIAL_ZOOM } from "./constants";
+import {
+  GMAP_BASELAYERS,
+  INITIAL_COORDINATES,
+  INITIAL_ZOOM,
+} from "./constants";
+import { defaultDrawStyles } from "./store";
 
 export const CurrentLayerContext = createContext();
 
 /**
  * Main App Component
- * @component 
+ * @component
  */
 const App = () => {
   const center = useRef(INITIAL_COORDINATES);
   const zoom = useRef(INITIAL_ZOOM);
-  const [selectedLayer, setSelectedLayer] = useState('hybrid');
+  const [selectedLayer, setSelectedLayer] = useState("hybrid");
 
   /**
    * Layer change handler
@@ -41,28 +46,35 @@ const App = () => {
    */
   const getSource = useMemo(() => {
     return new olSource.XYZ({
-      url: GMAP_BASELAYERS[selectedLayer]
+      url: GMAP_BASELAYERS[selectedLayer],
     });
   }, [selectedLayer]);
 
   const drawSource = new VectorSource({ wrapX: false });
 
-  drawSource.on('addfeature', (event) => {
+  drawSource.on("addfeature", (event) => {
+    const { strokeColor, strokeWidth, fillOpacity } =
+      defaultDrawStyles.getAll();
     if (event.feature.getGeometry().getType() !== GeometryType.POINT) {
-      event.feature.setStyle(new Style({
-        fill: new Fill({
-          color: 'rgba(0,0,0,0.5)'
-        }),
-        stroke: new Stroke({
-          color: 'red',
-          width: 4
+      const { rgb } = strokeColor;
+      const { r, g, b, a } = rgb;
+      event.feature.setStyle(
+        new Style({
+          fill: new Fill({
+            color: `rgba(${r},${g},${b},${fillOpacity})`,
+          }),
+          stroke: new Stroke({
+            color: `rgba(${r},${g},${b},${a})`,
+            width: strokeWidth,
+          }),
         })
-      }));
-      event.feature.setProperties({ // For exporting these styles to geojson.io as well
-        'fill': 'rgba(0,0,0,0.5)',
-        'stroke': 'red',
-        'stroke-width': 4,
-        'fill-opacity': 0.5
+      );
+      event.feature.setProperties({
+        // For exporting these styles to geojson.io as well
+        fill: strokeColor.hex,
+        stroke: strokeColor.hex,
+        "stroke-width": strokeWidth,
+        "fill-opacity": fillOpacity,
       });
     }
   });
@@ -72,24 +84,23 @@ const App = () => {
    */
   const currentLayerContext = {
     selectedLayer,
-    handleChangeLayer
+    handleChangeLayer,
   };
 
   return (
     <div>
-      <Map
-        center={fromLonLat(center.current)}
-        zoom={zoom.current}
-      >
+      <Map center={fromLonLat(center.current)} zoom={zoom.current}>
         <Layers>
-          <div key={selectedLayer}><TileLayer source={getSource} zIndex={0} /></div>
+          <div key={selectedLayer}>
+            <TileLayer source={getSource} zIndex={0} />
+          </div>
           <DrawLayer source={drawSource} zIndex={1} />
         </Layers>
         <CurrentLayerContext.Provider value={currentLayerContext}>
           <Toolbar drawSource={drawSource} />
         </CurrentLayerContext.Provider>
-        {/* <Explore /> */}
         <LayerSwitch />
+        {/* <Explore /> */}
       </Map>
     </div>
   );

@@ -132,3 +132,33 @@
   display: flex;
   align-items: center;
 }
+
+.ant-popover-inner {
+  padding: 16px;
+  background-color: #002139 !important;
+  color: #FFF !important;
+  font-size: 0.85rem !important;
+  font-family: Lato;
+  font-weight: 600 !important;
+}
+
+.ant-popover-arrow {
+  background-color: #002139 !important;
+  border-top-color: #002139 !important;
+  border-left-color: #002139 !important;
+  border-bottom-color: #002139 !important;
+  border-right-color: #002139 !important;
+}
+
+.layer-style {
+  color: #b5c1c6;
+}
+
+.layer-style .layer-style-label {
+  margin-bottom: 8px;
+  margin-top: 24px;
+}
+
+.mt-0 {
+  margin-top: 0 !important;
+}
