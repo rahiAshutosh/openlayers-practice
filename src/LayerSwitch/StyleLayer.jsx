@@ -1,5 +1,6 @@
 import React from "react";
 import Style from "ol/style/Style";
+import Icon from "ol/style/Icon";
 import { HuePicker } from "react-color";
 import Stroke from "ol/style/Stroke";
 import Fill from "ol/style/Fill";
@@ -40,14 +41,23 @@ const StyleLayer = React.memo(({ layer }) => {
     const { color = strokeColor, width = strokeWidth, opacity = fillOpacity } = config;
     const { rgb } = color;
     const { r, g, b, a } = rgb;
+    const fill = new Fill({
+      color: `rgba(${r},${g},${b},${opacity})`,
+    });
+    const stroke = new Stroke({
+      color: `rgba(${r},${g},${b},${a})`,
+      width,
+    });
     const style = new Style({
-      stroke: new Stroke({
-        color: `rgba(${r},${g},${b},${a})`,
-        width,
-      }),
-      fill: new Fill({
-        color: `rgba(${r},${g},${b},${opacity})`,
-      }),
+      stroke,
+      fill,
+      image: new Icon({
+        size: [100, 100],
+        src: process.env.PUBLIC_URL + '/Images/marker.png',
+        offset: [0, 0],
+        opacity: 1,
+        scale: 0.3,
+      })
     });
     layer.setStyle(style);
   };
