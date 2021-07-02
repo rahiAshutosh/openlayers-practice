@@ -8,7 +8,7 @@ import GeometryType from "ol/geom/GeometryType";
  * For drawing polygons, lines and points
  * @component
  */
-const DrawActions = ({
+const DrawActions = React.memo(({
   drawSource,
 }) => {
   const draw = useRef(null);
@@ -79,6 +79,6 @@ const DrawActions = ({
       </Tooltip>
     </>
   );
-};
+});
 
 export default DrawActions;

@@ -6,7 +6,7 @@ import List from "./List";
  * Layer specific controls
  * @component
  */
-const LayerSwitch = () => {
+const LayerSwitch = React.memo(() => {
   const mapLayers = useRef(null);
   const [layers, setLayers] = useState([]);
   const { map } = useContext(MapContext);
@@ -41,6 +41,6 @@ const LayerSwitch = () => {
       <List layers={layers} updateLayers={updateLayers} />
     </div>
   );
-};
+});
 
 export default LayerSwitch;

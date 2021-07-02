@@ -1,4 +1,4 @@
-import { useContext, useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import MapContext from "../Map/MapContext";
 import OLTileLayer from "ol/layer/Tile";
 
@@ -6,7 +6,7 @@ import OLTileLayer from "ol/layer/Tile";
  * Ready to use Tile Layer Wrapper
  * @component 
  */
-const TileLayer = ({ source, zIndex = 0 }) => {
+const TileLayer = React.memo(({ source, zIndex = 0 }) => {
 	const { map } = useContext(MapContext);
 
 	useEffect(() => {
@@ -29,6 +29,6 @@ const TileLayer = ({ source, zIndex = 0 }) => {
 	}, [map]);
 
 	return null;
-};
+});
 
 export default TileLayer;

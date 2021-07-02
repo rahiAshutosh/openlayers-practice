@@ -53,6 +53,8 @@ const DEFAULT_STROKE_COLOR = { hex: '#ff0000', rgb: { r: 255, g: 0, b: 0, a: 1 }
 const DEFAULT_STROKE_WIDTH = 4;
 const DEFAULT_FILL_OPACITY = 0.4;
 
+const DRAW_LAYER_NAME = 'Draw Layer';
+
 export {
   INITIAL_COORDINATES,
   INITIAL_ZOOM,
@@ -61,4 +63,5 @@ export {
   LAYERS,
   DEFAULT_STROKE_WIDTH,
   DEFAULT_FILL_OPACITY,
+  DRAW_LAYER_NAME,
 };

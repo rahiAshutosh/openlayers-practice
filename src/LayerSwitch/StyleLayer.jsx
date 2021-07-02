@@ -10,21 +10,21 @@ import {
   DEFAULT_STROKE_WIDTH,
 } from "../constants";
 import { useState } from "react";
-import { defaultDrawStyles } from "../store";
+import { useDebouncedCallback } from 'use-lodash-debounce';
 
 /**
  * For styling (fill, stroke) of the layer
  * @component
  */
-const StyleLayer = ({ layer }) => {
+const StyleLayer = React.memo(({ layer }) => {
   const [strokeColor, setStrokeColor] = useState(DEFAULT_STROKE_COLOR);
   const [strokeWidth, setStrokeWidth] = useState(DEFAULT_STROKE_WIDTH);
   const [fillOpacity, setFillOpacity] = useState(DEFAULT_FILL_OPACITY);
 
-  const handleChangeStrokeColor = (color) => {
+  const handleChangeStrokeColor = useDebouncedCallback((color) => {
     setStrokeColor(color);
     updateStyle({ color });
-  };
+  }, 0);
 
   const handleChangeStrokeWidth = (width) => {
     setStrokeWidth(width);
@@ -37,29 +37,19 @@ const StyleLayer = ({ layer }) => {
   };
 
   const updateStyle = (config = {}) => {
-    const { color, width, opacity } = config;
-    const { rgb } = color || strokeColor;
+    const { color = strokeColor, width = strokeWidth, opacity = fillOpacity } = config;
+    const { rgb } = color;
     const { r, g, b, a } = rgb;
     const style = new Style({
       stroke: new Stroke({
         color: `rgba(${r},${g},${b},${a})`,
-        width: width || strokeWidth,
+        width,
       }),
       fill: new Fill({
-        color: `rgba(${r},${g},${b},${opacity || fillOpacity})`,
+        color: `rgba(${r},${g},${b},${opacity})`,
       }),
     });
-    layer
-      .getSource()
-      .getFeatures()
-      .forEach((feature) => {
-        feature.setStyle(style);
-      });
-    if (layer.get("name") === "Draw Layer") {
-      defaultDrawStyles.change("strokeColor", color || strokeColor);
-      defaultDrawStyles.change("strokeWidth", width || strokeWidth);
-      defaultDrawStyles.change("fillOpacity", opacity || fillOpacity);
-    }
+    layer.setStyle(style);
   };
 
   const sliderContainerStyle = { margin: "0" };
@@ -73,7 +63,7 @@ const StyleLayer = ({ layer }) => {
       <div className="layer-style-label mt-0">Color Picker</div>
       <HuePicker
         color={strokeColor}
-        onChangeComplete={handleChangeStrokeColor}
+        onChange={handleChangeStrokeColor}
       />
       <div className="layer-style-label">Stroke Width</div>
       <Slider
@@ -99,6 +89,6 @@ const StyleLayer = ({ layer }) => {
       />
     </div>
   );
-};
+});
 
 export default StyleLayer;

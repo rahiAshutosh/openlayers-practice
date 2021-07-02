@@ -8,7 +8,7 @@ import { LAYERS } from "../constants";
  * Base layers switching
  * @component 
  */
-const Layers = () => {
+const Layers = React.memo(() => {
   const { selectedLayer, handleChangeLayer } = useContext(CurrentLayerContext);
   const [showLayers, setShowLayers] = useState(false);
 
@@ -39,6 +39,6 @@ const Layers = () => {
     </Drawer>
     </>
   );
-};
+});
 
 export default Layers;

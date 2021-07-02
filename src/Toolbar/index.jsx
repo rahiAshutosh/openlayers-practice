@@ -9,7 +9,7 @@ import Zoom from "./Zoom";
  * Toolbar for interacting with and controlling the map
  * @component
  */
-const Toolbar = ({
+const Toolbar = React.memo(({
   drawSource
 }) => {
   return (
@@ -21,6 +21,6 @@ const Toolbar = ({
       <Export />
     </div>
   );
-};
+});
 
 export default Toolbar;

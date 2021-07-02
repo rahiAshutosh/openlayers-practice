@@ -13,7 +13,7 @@ import StyleLayer from "./StyleLayer";
  * All the layer based actions like layer styling, download, zoom to layer, remove layer, turn on/off etc
  * @component
  */
-const LayerActions = ({ layer, updateLayers, markLayerForDelete }) => {
+const LayerActions = React.memo(({ layer, updateLayers, markLayerForDelete }) => {
   const { map } = useContext(MapContext);
   const isLayerVisible = layer.getVisible() ? "far fa-eye" : "far fa-eye-slash";
 
@@ -73,6 +73,6 @@ const LayerActions = ({ layer, updateLayers, markLayerForDelete }) => {
       </Row>
     </div>
   );
-};
+});
 
 export default LayerActions;

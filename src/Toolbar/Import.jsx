@@ -25,7 +25,7 @@ const dummyRequest = ({ file, onSuccess }) => {
  * Import GeoJSON layer(s) in the map
  * @component 
  */
-const Import = () => {
+const Import = React.memo(() => {
   const { map } = useContext(MapContext);
   const [showUpload, setShowUpload] = useState(false);
   const [selectedFileList, setSelectedFileList] = useState([]);
@@ -100,6 +100,6 @@ const Import = () => {
       </Modal>
     </>
   );
-};
+});
 
 export default Import;

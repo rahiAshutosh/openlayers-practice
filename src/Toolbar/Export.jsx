@@ -8,7 +8,7 @@ import { exportVectorFeaturesAsGeoJSON } from "../helper";
  * Export current map (all vector layers) as GeoJSON
  * @component
  */
-const Export = () => {
+const Export = React.memo(() => {
   const { map } = useContext(MapContext);
 
   const exportGeojson = () => {
@@ -32,6 +32,6 @@ const Export = () => {
       </Tooltip>
     </>
   );
-};
+});
 
 export default Export;

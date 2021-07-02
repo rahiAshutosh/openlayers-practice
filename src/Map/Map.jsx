@@ -14,7 +14,7 @@ import useSelect from "../Interactions/useSelect";
  * @param {number} props.zoom - Zoom Value
  * @param {number} props.center - Center Value
  */
-const Map = ({
+const Map = React.memo(({
   children,
   zoom,
   center,
@@ -63,5 +63,6 @@ const Map = ({
       </div>
     </MapContext.Provider>
   )
-}
+});
+
 export default Map;

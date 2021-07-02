@@ -3,7 +3,7 @@ import { Modal } from "antd";
 import MapContext from "../Map/MapContext";
 import LayerActions from "./LayerActions";
 
-const List = ({ layers, updateLayers }) => {
+const List = React.memo(({ layers, updateLayers }) => {
   const { map } = useContext(MapContext);
   const [showConfirmRemoveLayer, setShowConfirmRemoveLayer] = useState(false);
   const [activeLayer, setActiveLayer] = useState(null);
@@ -87,6 +87,6 @@ const List = ({ layers, updateLayers }) => {
       </Modal>
     </>
   );
-};
+});
 
 export default List;

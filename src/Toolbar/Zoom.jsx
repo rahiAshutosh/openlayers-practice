@@ -7,7 +7,7 @@ import { Tooltip } from "antd";
  * Zoom In/Out Controls
  * @component 
  */
-const Zoom = () => {
+const Zoom = React.memo(() => {
   const { map } = useContext(MapContext);
 
   const zoomIn = () => {
@@ -36,6 +36,6 @@ const Zoom = () => {
       </Tooltip>
     </>
   );
-};
+});
 
 export default Zoom;
