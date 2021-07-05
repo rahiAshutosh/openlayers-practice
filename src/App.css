@@ -142,6 +142,13 @@
   font-weight: 600 !important;
 }
 
+.ant-popover-inner .ant-radio-wrapper {
+  color: #FFF !important;
+  font-size: 0.85rem !important;
+  font-family: Lato;
+  font-weight: 600 !important;
+}
+
 .ant-popover-arrow {
   background-color: #002139 !important;
   border-top-color: #002139 !important;

@@ -1,10 +1,6 @@
 import React, { useRef, useState, useEffect } from "react";
 import MapContext from "./MapContext";
 import * as ol from "ol";
-import useDragRotate from "../Interactions/useDragRotate";
-import useOverviewMap from "../Controls/useOverviewMap";
-import useDragDrop from "../Interactions/useDragDrop";
-import useSelect from "../Interactions/useSelect";
 
 /**
  * HOC: Map Wrapper Component, Initializes the map and adds interactions to it
@@ -21,11 +17,6 @@ const Map = React.memo(({
 }) => {
   const mapRef = useRef();
   const [map, setMap] = useState(null);
-
-  useDragRotate(map);
-  useOverviewMap(map);
-  useDragDrop(map);
-  useSelect(map);
 
   useEffect(() => {
     let options = {

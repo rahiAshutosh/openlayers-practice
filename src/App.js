@@ -7,6 +7,7 @@ import "./App.css";
 import "antd/dist/antd.css";
 import "ol/ol.css";
 import Toolbar from "./Toolbar";
+import TranslateModifyConfig from "./Interactions/TranslateModifyConfig/index";
 import LayerSwitch from "./LayerSwitch";
 import { Vector as VectorSource } from "ol/source";
 import {
@@ -64,7 +65,9 @@ const App = () => {
           <DrawLayer source={drawSource} zIndex={1} />
         </Layers>
         <CurrentLayerContext.Provider value={currentLayerContext}>
-          <Toolbar drawSource={drawSource} />
+          <TranslateModifyConfig>
+            <Toolbar drawSource={drawSource} />
+          </TranslateModifyConfig>
         </CurrentLayerContext.Provider>
         <LayerSwitch />
         {/* <Explore /> */}

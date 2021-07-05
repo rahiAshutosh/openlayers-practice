@@ -3,6 +3,7 @@ import React, { useContext, useRef, useEffect } from "react";
 import { Draw, Modify, Snap } from "ol/interaction";
 import MapContext from "../Map/MapContext";
 import GeometryType from "ol/geom/GeometryType";
+import ConfigContext from "../Interactions/TranslateModifyConfig/ConfigContext";
 
 /**
  * For drawing polygons, lines and points
@@ -13,7 +14,9 @@ const DrawActions = React.memo(({
 }) => {
   const draw = useRef(null);
   const snap = useRef(null);
+  const modify = useRef(null);
   const { map } = useContext(MapContext);
+  const { config } = useContext(ConfigContext);
 
   const clearInteractions = () => {
     map.removeInteraction(draw.current);
@@ -37,10 +40,12 @@ const DrawActions = React.memo(({
 
   useEffect(() => {
     if (map) {
-      var modify = new Modify({ source: drawSource });
-      map.addInteraction(modify);
+      modify.current = new Modify({ source: drawSource });
+      modify.current.setActive(config.allowModify);
+      map.addInteraction(modify.current);
+      return () => map.removeInteraction(modify.current);
     }
-  }, [map, drawSource]);
+  }, [map, drawSource, config]);
 
   const addInteraction = (selectedDrawType) => {
     var value = selectedDrawType;

@@ -1,8 +1,14 @@
-import React from "react";
+import React, { useContext } from "react";
+import useOverviewMap from "../Controls/useOverviewMap";
+import useDragDrop from "../Interactions/useDragDrop";
+import useDragRotate from "../Interactions/useDragRotate";
+import useSelect from "../Interactions/useSelect";
+import MapContext from "../Map/MapContext";
 import Draw from "./Draw";
 import Export from "./Export";
 import Import from "./Import";
 import Layers from "./Layers";
+import Tools from "./Tools";
 import Zoom from "./Zoom";
 
 /**
@@ -12,6 +18,13 @@ import Zoom from "./Zoom";
 const Toolbar = React.memo(({
   drawSource
 }) => {
+  const { map } = useContext(MapContext);
+
+  useDragRotate(map);
+  useOverviewMap(map);
+  useDragDrop(map);
+  useSelect(map);
+
   return (
     <div className="toolbar">
       <Zoom />
@@ -19,6 +32,7 @@ const Toolbar = React.memo(({
       <Draw drawSource={drawSource} />
       <Import />
       <Export />
+      <Tools />
     </div>
   );
 });
