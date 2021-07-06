@@ -2,7 +2,7 @@ import React, { useContext } from "react";
 import useOverviewMap from "../Controls/useOverviewMap";
 import useDragDrop from "../Interactions/useDragDrop";
 import useDragRotate from "../Interactions/useDragRotate";
-import useSelect from "../Interactions/useSelect";
+import useDragSelect from "../Interactions/useDragSelect";
 import MapContext from "../Map/MapContext";
 import Draw from "./Draw";
 import Export from "./Export";
@@ -23,7 +23,7 @@ const Toolbar = React.memo(({
   useDragRotate(map);
   useOverviewMap(map);
   useDragDrop(map);
-  useSelect(map);
+  useDragSelect(map);
 
   return (
     <div className="toolbar">
