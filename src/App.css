@@ -169,3 +169,19 @@
 .mt-0 {
   margin-top: 0 !important;
 }
+
+.architecture-switch {
+  position: absolute;
+  bottom: 0;
+  background-color: rgba(0,0,0,0.75);
+  width: 100%;
+  padding: 16px;
+  color: #fff;
+  font-weight: bold;
+}
+
+.architecture-switch .ant-radio-wrapper {
+  font-family: Lato;
+  color: #fff;
+  font-weight: bold;
+}

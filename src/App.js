@@ -1,77 +1,24 @@
-import React, { useState, useMemo, createContext, useRef } from "react";
-import Map from "./Map";
-import { Layers, TileLayer, DrawLayer } from "./Layers";
-import { fromLonLat } from "ol/proj";
-import * as olSource from "ol/source";
-import "./App.css";
-import "antd/dist/antd.css";
-import "ol/ol.css";
-import Toolbar from "./Toolbar";
-import TranslateModifyConfig from "./Interactions/TranslateModifyConfig/index";
-import LayerSwitch from "./LayerSwitch";
-import { Vector as VectorSource } from "ol/source";
-import {
-  GMAP_BASELAYERS,
-  INITIAL_COORDINATES,
-  INITIAL_ZOOM,
-} from "./constants";
+import React, { Suspense, useState } from "react";
+import { Radio } from "antd";
+import Architecture1 from "./Architecture_1";
 
-export const CurrentLayerContext = createContext();
-
-/**
- * Main App Component
- * @component
- */
 const App = () => {
-  const center = useRef(INITIAL_COORDINATES);
-  const zoom = useRef(INITIAL_ZOOM);
-  const [selectedLayer, setSelectedLayer] = useState("hybrid");
+  const [choice, setChoice] = useState(2);
 
-  /**
-   * Layer change handler
-   * @param {string} layerName - Name of layer being chosen
-   */
-  const handleChangeLayer = (layerName) => {
-    setSelectedLayer(layerName);
-  };
+  const changeArchitecture = (e) => setChoice(e.target.value);
 
-  /**
-   * Provide source for base layer as per user choice
-   * @function
-   */
-  const getSource = useMemo(() => {
-    return new olSource.XYZ({
-      url: GMAP_BASELAYERS[selectedLayer],
-    });
-  }, [selectedLayer]);
-
-  const drawSource = new VectorSource({ wrapX: false });
-
-  /**
-   * Context containing the active layer, and callback to change the layer
-   */
-  const currentLayerContext = {
-    selectedLayer,
-    handleChangeLayer,
-  };
+  const SecondArchitecture = React.lazy(() => import('./Architecture_2/main'));
+  const currentArchitecture = choice === 1 ? <Architecture1 />: <Suspense fallback={<span>Loading</span>}><SecondArchitecture /></Suspense>
 
   return (
-    <div>
-      <Map center={fromLonLat(center.current)} zoom={zoom.current}>
-        <Layers>
-          <div key={selectedLayer}>
-            <TileLayer source={getSource} zIndex={0} />
-          </div>
-          <DrawLayer source={drawSource} zIndex={1} />
-        </Layers>
-        <CurrentLayerContext.Provider value={currentLayerContext}>
-          <TranslateModifyConfig>
-            <Toolbar drawSource={drawSource} />
-          </TranslateModifyConfig>
-        </CurrentLayerContext.Provider>
-        <LayerSwitch />
-        {/* <Explore /> */}
-      </Map>
+    <div className="container">
+      {currentArchitecture}
+      <footer className="architecture-switch">
+        <Radio.Group value={choice} onChange={changeArchitecture}>
+          <Radio value={1}>First Architecture</Radio>
+          <Radio value={2}>Second Architecture</Radio>
+        </Radio.Group>
+      </footer>
     </div>
   );
 };

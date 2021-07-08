@@ -2,7 +2,7 @@ import { click, platformModifierKeyOnly } from "ol/events/condition";
 import { DragBox, Select } from "ol/interaction";
 import VectorSource from "ol/source/Vector";
 import { useEffect, useRef } from "react";
-import { DELETE_KEYCODE } from "../constants";
+import { DELETE_KEYCODE } from "../../constants";
 
 const useDragSelect = (map) => {
   const selectedFeatures = useRef();

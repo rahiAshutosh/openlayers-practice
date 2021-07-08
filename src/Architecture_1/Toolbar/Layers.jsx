@@ -1,8 +1,8 @@
 import { MenuUnfoldOutlined } from "@ant-design/icons";
 import { Drawer, Select, Tooltip } from "antd";
 import React, { useContext, useState } from "react";
-import { CurrentLayerContext } from "../App";
-import { LAYERS } from "../constants";
+import { CurrentLayerContext } from "../index";
+import { LAYERS } from "../../constants";
 
 /**
  * Base layers switching

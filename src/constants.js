@@ -41,6 +41,7 @@ const GMAP_BASELAYERS = {
  * @default
  */
 const LAYERS = [
+  { label: 'OSM', value: 'OSM' },
   { label: 'Satellite Only', value: 'satelliteOnly' },
   { label: 'Road Map', value: 'roadmap' },
   { label: 'Terrain', value: 'terrain' },

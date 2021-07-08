@@ -9,7 +9,7 @@ import {
   DEFAULT_FILL_OPACITY,
   DEFAULT_STROKE_COLOR,
   DEFAULT_STROKE_WIDTH,
-} from "../constants";
+} from "../../../constants";
 import { useState } from "react";
 import { useDebouncedCallback } from 'use-lodash-debounce';
 
